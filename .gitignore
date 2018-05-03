@@ -1,0 +1,9 @@
+node_modules/
+myaccount/
+scss/
+static/
+db.sqlite3
+gulpfile.js
+package.json
+populate_data.py
+webpack.config.js

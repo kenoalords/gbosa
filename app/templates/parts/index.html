@@ -1,0 +1,21 @@
+{% extends "../base.html" %}
+
+{% block content %}
+    <div class="hero is-medium" id="posts">
+        <div class="hero-body">
+            <div class="columns">
+                <div class="column is-2 is-hidden-mobile">
+                    {% include "./tags/popular_tags.html" %}
+                </div>
+                <div class="column is-8">
+                    {% for post in posts %}
+                        {% include "./posts/_post.html" with post=post %}
+                    {% endfor %}
+
+                    {% include "./_paginator.html" with posts=posts %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

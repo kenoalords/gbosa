@@ -1,0 +1,97 @@
+{% extends "../../base.html" %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+{% block description %}{{ post.description|truncatewords:36|striptags }}{% endblock description %}
+
+{% load sanitizer %}
+
+{% block content %}
+    <div class="hero is-medium" id="single-post">
+        <div class="hero-body">
+            <div class="columns">
+
+                <div class="column is-8">
+                    <div class="level is-mobile">
+                        <div class="level-left">
+                            <div class="level-item">
+                                {% include "../user/_avatar.html" with payload=post %}
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <a href="#" class="button is-small is-rounded is-dark">
+                                    {{ post.get_post_type_display }}
+                                </a>
+                            </div>
+                            {% if user.is_authenticated and user == post.user %}
+                            <div class="level-item">
+                                <a href="{% url "app:edit-post" pk=post.pk %}" class="button is-small is-danger is-circular">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="8" height="8" viewBox="0 0 512 512"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <h1 class="title is-3">
+                        {{ post.title }}
+                    </h1>
+
+                    {% include "./_post_meta.html" with post=post %}
+
+                    {% if post.tags.count > 0 %}
+                        <div class="tags">
+                            {% for tag in post.tags.all %}
+                                <a href="{% url "app:tag-list" tag.slug %}" class="button is-small is-light is-rounded">{{ tag|capfirst }}</a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% if post.post_type == 'E' %}
+                        <article class="post post-type-{{ post.get_post_type_display|lower }}" id="post-{{ post.id }}">
+                            {{ post.description|strip_html|safe }}
+                        </article>
+                    {% endif %}
+
+                    {% if post.post_type == 'Q' %}
+                        <!-- Include answer form -->
+                        {% include "../answers/answer-form.html" with form=form %}
+                    {% else %}
+                        <!-- Include comment form -->
+                        {% include "../comments/comment-form.html" with form=c_form %}
+                    {% endif %}
+
+
+
+                    <!-- Loop through answers -->
+                    <div id="comment-section">
+                        {% if post.post_type == 'Q' %}
+                            <h3 class="title is-6">{{ answers.count }} Answer{{ answers.count|pluralize }}</h3>
+                            {% for answer in answers %}
+                                {% include '../answers/answer.html' with answer=answer %}
+                            {% endfor %}
+                        {% else %}
+                            <h3 class="title is-6">{{ post.comments.count }} Comment{{ post.comments.count|pluralize }}</h3>
+                            {% for comment in post.comments.all %}
+                                {% include '../comments/comment.html' with comment=comment %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="column is-4 sidebar">
+                    {% include "../tags/popular_tags.html" %}
+
+                    {% if post.tags.similar_objects %}
+                        <h4 class="title is-6" style="margin-top:2em">Related Posts</h4>
+                        <ul class="related-post">
+                            {% for post in post.tags.similar_objects %}
+                                <li><a href="{% url "app:view-post" post.pk post.slug %}">{{ post.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <div><a href="{% url "app:add-post" %}" class="button is-primary is-small has-text-weight-bold">Submit post</a></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

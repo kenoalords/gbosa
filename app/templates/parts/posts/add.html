@@ -1,0 +1,54 @@
+{% extends "../../base.html" %}
+
+{% block title %} Add Post {% endblock %}
+
+{% block content %}
+
+    <div class="hero is-medium">
+        <div class="hero-body">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <h2 class="title is-3">Ask a question or share an experience</h2>
+                    <!-- <p></p> -->
+                    <hr>
+                    {{ form.non_field_errors }}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="field">
+                            <div class="choices">
+                                <h3 class="title is-5 has-text-danger">What will you like to share today?</h3>
+                                {{ form.post_type }}
+                            </div>
+                        </div>
+                        <div class="field">
+                            {{ form.title }}
+                        </div>
+                        <div class="field" id="description">
+                            {{ form.description }}
+                        </div>
+                        <div class="field">
+                            <h3 class="title is-6">Tag your <span class="def-post">post</span>.</h3>
+                            {{ form.tags }}
+                            <p class="help">You can enter multiple tags seperated by a comma</p>
+                        </div>
+                        <div class="field">
+                            {% if user.psuedouser %}
+                                <div class="psuedo-field">
+                                    <label>
+                                        {{ form.is_anonymous }} Post as <a href="{% url "psuedonym" %}" target="_blank" class="has-text-weight-bold">{{ user.psuedouser.fullname }}</a>
+                                    </label>
+                                </div>
+                            {% else %}
+                                {% include "../user/setup_anonymous_user.html" %}
+                            {% endif %}
+                        </div>
+                        <div class="field">
+                            <button class="button is-primary" id="submit-post-button" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends './base.html' %}
+{% load static %}
+{% block content %}
+
+    {{ form.non_field_errors }}
+    <figure class="image is-centered is-64x64" style="margin: 0 auto 2em">
+        <img src="{% static "images/no-user.svg" %}" alt="Anonymous" >
+    </figure>
+    <h3 class="title is-4 has-text-centered">Set up your Pseudonym</h3>
+    <p>Your <a href="https://en.wikipedia.org/wiki/Pseudonym" target="_blank">pseudonym</a> allows you to ask sensitive questions without revealing your true identity to the public</p>
+    <div class="card">
+        <div class="card-content">
+            <form method="post">
+                {% csrf_token %}
+                <div class="field">
+                    {{ form.first_name }}
+                </div>
+                <div class="field">
+                    {{ form.last_name }}
+                </div>
+                <div class="field">
+                    <button class="button is-block is-primary" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p class="help" style="margin-top: 2em">A Psuedonym will automatically be generated for you. If you will like to use it, click the save button above</p>
+
+{% endblock %}

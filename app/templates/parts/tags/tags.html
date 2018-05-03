@@ -1,0 +1,26 @@
+{% extends "../../base.html" %}
+
+{% block content %}
+
+    <div class="hero is-medium">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-2 is-hidden-mobile">
+                        {% include "./popular_tags.html" %}
+                    </div>
+                    <div class="column is-8">
+                        {% if posts %}
+                            {% for post in posts %}
+                                {% include "../posts/_post.html" with post=post %}
+                            {% endfor %}
+                        {% else %}
+                            <h4 class="title is-6 has-text-centered">No posts found</h4>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

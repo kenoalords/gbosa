@@ -1,0 +1,10 @@
+<form method="get" action="{% url "search" %}">
+    <div class="field has-addons">
+        <div class="control is-expanded">
+            <input type="text" name="q" placeholder="Search here.." class="input" value="{{ request.GET.q }}">
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-primary">Search</button>
+        </div>
+    </div>
+</form>

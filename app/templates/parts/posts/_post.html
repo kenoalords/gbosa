@@ -1,0 +1,25 @@
+<div class="card question" id="post-{{ post.id }}">
+    <div class="card-content">
+        <div class="level is-mobile" style="margin-bottom: .5em">
+            <div class="level-left">
+                <div class="level-item">
+                    {% include "../user/_avatar.html" with payload=post %}
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                    <a href="{% url "app:post-type-list" post.post_type %}" class="button is-small is-rounded is-dark">
+                        {{ post.get_post_type_display }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <h2 class="title is-5">
+            <a href="{% url "app:view-post" post.id post.slug %}">{{ post.title }}</a>
+        </h2>
+        {% if post.description and post.post_type == 'E' %}
+            <p>{{ post.description|truncatewords:24|striptags }}</p>
+        {% endif %}
+        {% include "./_post_meta.html" with post=post %}
+    </div>
+</div>

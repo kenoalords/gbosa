@@ -1,0 +1,20 @@
+{% load static humanize %}
+<div class="avatar small">
+    <figure class="image is-48x48 circle">
+        {% if payload.is_anonymous %}
+            <img src="{% static "images/no-user.png" %}" alt="{{ payload.user.psuedouser.fullname|striptags }}">
+        {% else %}
+            <img src="http://via.placeholder.com/150x150" alt="{{ payload.user.first_name|striptags }} {{ payload.user.last_name|striptags }}">
+        {% endif %}
+    </figure>
+    <div>
+        <div class="info">
+            {% if payload.is_anonymous %}
+                {{ payload.user.psuedouser.fullname|striptags }}
+            {% else %}
+                {{ payload.user.first_name|striptags }} {{ payload.user.last_name|striptags }}
+            {% endif %}
+        </div>
+        <span class="date inline">{{ payload.created_at|naturaltime }}</span>
+    </div>
+</div>

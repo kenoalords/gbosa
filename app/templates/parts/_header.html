@@ -1,0 +1,47 @@
+{% load static %}
+<header id="main">
+    <nav class="navbar is-fixed-top is-raised is-transparent" id="main-navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="{% url 'index' %}" class="navbar-item">
+                    <img src="{% static "images/gbosa-logo.svg" %}" alt="Gbosa Logo">
+                </a>
+
+                <a class="navbar-burger" id="menu-trigger" href="#" aria-label="main menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <div class="navbar-item">
+                        {% include "./search/form.html" %}
+                    </div>
+                    <a href="{% url "app:post-type-list" 'Q' %}" class="navbar-item">Questions</a>
+                    <a href="{% url "app:post-type-list" 'E' %}" class="navbar-item">Experiences</a>
+                </div>
+                <div class="navbar-end">
+                    {% if user.is_authenticated %}
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <div class="navbar-link">
+                                {{ user.username|capfirst }}
+                            </div>
+                            <div class="navbar-dropdown">
+                                <a href="{% url 'user-posts' %}" class="navbar-item">My Posts</a>
+                                <a href="{% url 'psuedonym' %}" class="navbar-item">Psuedonym</a>
+                                <a href="{% url 'logout' %}" class="navbar-item">Logout</a>
+                            </div>
+                        </div>
+
+                    {% else %}
+                        <a href="{% url 'social-login' %}" class="navbar-item">Login</a>
+                    {% endif %}
+                    <div class="navbar-item">
+                        <a href="{% url 'app:add-post' %}" class="button is-primary">Ask Question</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

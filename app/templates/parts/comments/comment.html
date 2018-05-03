@@ -1,0 +1,39 @@
+<div class="card answer">
+    <div class="card-content">
+        <div class="meta">
+            <div class="level is-mobile">
+                <div class="level-left">
+                    <div class="level-item">
+                        {% include "../user/_avatar.html" with payload=comment %}
+                    </div>
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <article>
+            <p>{{ comment.comment|linebreaksbr }}</p>
+        </article>
+        <footer class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <form action="{% url "app:comment-like" comment.id %}" method="POST" id="comment-{{ comment.id }}">
+                        {% csrf_token %}
+                        <input type="hidden" name="comment" value="{{ comment.id }}">
+                        <input type="hidden" name="_redirect" value="{{ request.path }}">
+                        <button type="submit" class="button is-borderless is-small">
+                            <span class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="12" height="12"><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/></svg>
+                            </span>
+                            <span class="has-font-weight-bold">{{ comment.likes.count }} Like{{ comment.likes.count|pluralize }}</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

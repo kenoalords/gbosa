@@ -1,0 +1,27 @@
+{% if user.is_authenticated %}
+{% load static %}
+<div id="answer-form">
+    <!-- <h2 class="title is-5">Comment</h2> -->
+    <form method="POST" action="{% url "app:post-comment" pk=post.pk %}">
+        <div class="card">
+            <div class="card-content" style="padding-bottom:0">
+                {% csrf_token %}
+                <div class="field is-grouped">
+                    <figure class="control image is-32x32 circle">
+                        <img src="{% static "images/no-user.svg" %}" alt="{{ user.psuedouser.fullname|striptags }}">
+                    </figure>
+                    <p class="control is-expanded">
+                        {{ form.comment }}
+                    </p>
+                    <p class="control">
+                        <button type="submit" class="button is-primary is-small" style="font-weight: bold; padding-bottom: 25px; line-height: 23px;">Submit</button>
+                    </p>
+                </div>
+
+                <input type="hidden" name="_id" value="{{ question.id }}">
+
+            </div>
+        </div>
+    </form>
+</div>
+{% endif %}

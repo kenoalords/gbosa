@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static repeatedblocks %}
+    <meta charset="UTF-8">
+    {% include "./parts/meta_tags/meta.html" %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% repeated_block title %}Gbosa!{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="icon" href="{% static "images/favicon.png" %}?v=1" type="image/png">
+
+    <meta name="description" content="{% repeated_block description %}Improving lives by sharing and asking life changing questions one post at a time. Share your own experience today!{% endblock %}" />
+
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="{% repeat title %}">
+    <meta itemprop="description" content="{% repeat description %}">
+    <meta itemprop="image" content="{% static "images/gbosa-social-share-image.png" %}">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" value="{% repeat title %}">
+    <meta name="twitter:site" content="@gbosadotcom">
+    <meta name="twitter:image:src" content="{% static "images/gbosa-social-share-image.png" %}">
+    <meta name="twitter:description" content="{% repeat description %}">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="{% repeat title %}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:image" content="{% static "images/gbosa-social-share-image.png" %}" />
+    <meta property="og:description" content="{% repeat description %}" />
+    <meta property="og:site_name" content="Gbosa!" />
+</head>
+<body>
+    {% include "./parts/_header.html" %}
+    <!-- End header -->
+    <div class="container" id="content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    {% include "./footer.html" %}
+
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+    <!-- <script type="text/javascript" src="/sw.js"></script> -->
+</body>
+</html>
