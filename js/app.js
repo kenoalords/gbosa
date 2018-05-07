@@ -3,7 +3,7 @@ import Quill from "quill";
 import autoResize from "autoresize-textarea";
 import '../scss/main.scss';
 
-// tagSuggestions
+//  tagSuggestions
 /*
 
 	jQuery Tags Input Plugin 1.3.3
@@ -502,3 +502,31 @@ jQuery('#menu-trigger').on('click', (e)=>{
 })
 
 PostType.init('#id_post_type', '#description')
+
+const SidebarMenu = {
+	init: function(el){
+		jQuery(el).on('click', function(e){
+			e.preventDefault();
+			SidebarMenu.openMenu();
+		});
+	},
+	openMenu: function(){
+		jQuery('body').addClass('sidebar-menu-active')
+	},
+	closeMenu: function(){
+		jQuery('body').removeClass('sidebar-menu-active')
+	}
+}
+
+SidebarMenu.init("#sidebar-menu-trigger");
+
+jQuery('#sidebar-menu').on('click', function(e){
+	if ( e.target === this){
+		SidebarMenu.closeMenu();
+	}
+});
+
+jQuery('#close-menu').on('click', function(e){
+	e.preventDefault()
+	SidebarMenu.closeMenu();
+})

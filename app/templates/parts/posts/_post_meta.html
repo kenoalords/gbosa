@@ -16,9 +16,9 @@
             <form action="{% url "app:subscribe-add" post.id %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{ post.id }}">
-                <button type="submit" class="button is-borderless is-small is-subscribe">
+                <button type="submit" class="button is-borderless is-subscribe">
                     <span class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 90 612 612" width="14" height="14">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" width="16" height="16">
                           <circle cx="153" cy="549" r="65.57"/>
                           <path d="M368.2 614.57h-46.9c-8.21 0-15.1-6.33-15.63-14.53-7.13-109.35-94.6-196.6-203.71-203.7a15.62 15.62 0 0 1-14.53-15.64v-46.9a15.6 15.6 0 0 1 16.39-15.6c151 8.15 271.84 129.14 279.99 279.99a15.6 15.6 0 0 1-15.6 16.38z"/>
                           <path d="M508.94 614.57h-46.9a15.66 15.66 0 0 1-15.6-15.08c-7.66-186.51-157.39-336.27-343.93-343.92a15.66 15.66 0 0 1-15.08-15.61v-46.9a15.6 15.6 0 0 1 16.1-15.62c229.27 8.23 412.84 192.88 421.03 421.03a15.6 15.6 0 0 1-15.62 16.1z"/>
@@ -40,7 +40,7 @@
         <div class="level-item">
             <div class="dropdown is-hoverable is-up is-right">
                 <div class="dropdown-trigger">
-                    <button class="button is-icon-button is-small is-borderless" aria-haspopup="true" aria-controls="ss-menu" aria-label="Share menu popup">
+                    <button class="button is-icon-button is-borderless" aria-haspopup="true" aria-controls="ss-menu" aria-label="Share menu popup">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16">
                           <path d="M561.94 158.06l-144-143.97C387.93-15.92 336 5.1 336 48.03v57.2c-42.45 1.88-84.03 6.55-120.76 17.99-35.17 10.95-63.07 27.58-82.91 49.42C108.22 199.2 96 232.6 96 271.94c0 61.7 33.18 112.45 84.87 144.76 37.55 23.5 85.25-12.65 71.02-55.74-15.52-47.12-17.16-70.92 84.11-78.76V336c0 43 51.97 63.91 81.94 33.94l144-144a47.99 47.99 0 0 0 0-67.88zM384 336V232.16C255.3 234.08 166.5 255.35 206.31 376 176.79 357.55 144 324.08 144 271.94c0-109.33 129.14-118.95 240-119.85V48l144 144-144 144zm24.74 84.5a82.66 82.66 0 0 0 20.97-9.31c7.98-4.95 18.29.83 18.29 10.21V464a48 48 0 0 1-48 48H48a48 48 0 0 1-48-48V112a48 48 0 0 1 48-48h132a12 12 0 0 1 12 12v4.49c0 4.91-2.99 9.37-7.57 11.15a245.18 245.18 0 0 0-38.05 18.58 12.14 12.14 0 0 1-6.28 1.78H54a6 6 0 0 0-6 6v340a6 6 0 0 0 6 6h340a6 6 0 0 0 6-6v-25.97c0-5.37 3.58-10.05 8.74-11.54z"/>
                         </svg>
