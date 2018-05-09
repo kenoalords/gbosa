@@ -1,6 +1,7 @@
 node_modules/
 myaccount/
 scss/
+js/
 static/
 db.sqlite3
 gulpfile.js
