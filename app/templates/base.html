@@ -6,7 +6,7 @@
     {% include "./parts/meta_tags/meta.html" %}
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% repeated_block title %}Gbosa!{% endblock %}</title>
-
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="icon" href="{% static "images/favicon.png" %}?v=1" type="image/png">
 
     <meta name="description" content="{% repeated_block description %}Improving lives by sharing and asking life changing questions one post at a time. Share your own experience today!{% endblock %}" />
@@ -38,7 +38,7 @@
         {% endblock content %}
     </div>
     {% include "./footer.html" %}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
     <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 </body>
 </html>
