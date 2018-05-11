@@ -18,7 +18,7 @@
             <a href="{% url "app:view-post" post.id post.slug %}">{{ post.title }}</a>
         </h2>
         {% if post.description and post.post_type == 'E' %}
-            <p>{{ post.description|truncatewords:24|striptags }}</p>
+            <p>{{ post.description|truncatewords:48|striptags }}</p>
         {% endif %}
         {% include "./_post_meta.html" with post=post %}
     </div>

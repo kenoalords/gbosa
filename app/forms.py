@@ -17,7 +17,7 @@ class PostForm(ModelForm):
 
     title.widget.attrs.update({'class': 'input title-input', 'placeholder' : 'Enter a title'})
     tags.widget.attrs.update({'class': 'input', 'placeholder': 'Start typing a category'})
-    description.widget.attrs.update({'class': 'textarea', 'rows': 3, 'placeholder': 'Say what happened'})
+    description.widget.attrs.update({'class': 'textarea', 'rows': 3, 'placeholder': 'Start typing...'})
 
     class Meta:
         model = Post

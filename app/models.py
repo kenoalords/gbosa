@@ -20,6 +20,16 @@ class PsuedoUser(models.Model):
     def fullname(self):
         return "{} {}".format(self.first_name, self.last_name)
 
+class UserProfile(models.Model):
+    GENDER_CHOICES = (
+        ('male', 'Male'),
+        ('female', 'Female')
+    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    gender = models.CharField(choices=GENDER_CHOICES, blank=True, null=True, max_length=8)
+    date_of_birth = models.DateField(blank=True, null=True)
+    avatar = models.ImageField(blank=True, null=True)
+
 class Region(models.Model):
     ip = models.GenericIPAddressField()
     city = models.CharField(max_length=128, blank=True)
@@ -85,6 +95,7 @@ class Post(models.Model):
     description = models.TextField(db_index=True, blank=True, null=True)
     post_type = models.CharField(max_length=2, choices=TYPE_CHOICES, default='Q', null=False)
     is_anonymous = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     answers = models.ManyToManyField(Answer)

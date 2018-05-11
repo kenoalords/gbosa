@@ -29,7 +29,7 @@ class SocialLoginView(TemplateView):
 
 # Class base Posts List View
 class PostList(ListView):
-    queryset = Post.objects.order_by('-created_at').all()
+    queryset = Post.objects.filter(is_published=True).order_by('-created_at').all()
     context_object_name = 'posts'
     template_name = './parts/index.html'
     paginate_by = 4
@@ -86,6 +86,9 @@ class PostCreate(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.slug = slugify(form.instance.title)
+        if self.request.POST['status'] == 'publish':
+            form.instance.is_published = True
+            
         mailer.delay('Post created', 'A new post was created', ['kenoalords@gmail.com'])
         return super().form_valid(form)
 
