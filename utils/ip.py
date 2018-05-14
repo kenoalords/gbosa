@@ -9,7 +9,7 @@ def view_log(model):
         with request.urlopen("https://geoip-db.com/json/") as url:
             data = json.loads(url.read().decode())
             ip = data['IPv4'] or data['IPv6']
-            view_log = View.objects.create(ip=ip, state=data['state'], city=data['city'], country=data['country_name'], country_code=data['country_code'], latitude=data['latitude'], longitude=data['longitude'])
+            view_log = View.objects.create(ip=ip, state=data['state'], city=data['city'], country_name=data['country_name'], country_code=data['country_code'], latitude=data['latitude'], longitude=data['longitude'])
             model.views.add(view_log)
             model.save()
     except:
@@ -17,18 +17,15 @@ def view_log(model):
 
 def view_log_entry(model, data):
     ip = data['IPv4'] or data['IPv6']
-    view_log = View.objects.create(ip=ip, state=data['state'], city=data['city'], country=data['country_name'], country_code=data['country_code'], latitude=data['latitude'], longitude=data['longitude'])
+    view_log = View.objects.create(ip=ip, state=data['state'], city=data['city'], country_name=data['country_name'], country_code=data['country_code'], latitude=data['latitude'], longitude=data['longitude'])
     model.views.add(view_log)
     model.save()
-    # try:
-    #
-    # except:
-    #     print("ViewLogError: Sorry couldn't save view log to database")
+
 
 def ip_info():
     try:
         with request.urlopen("https://geoip-db.com/json/") as url:
-            print('From Geo-IP DB')
+            print('From GEO-IP')
             return json.loads(url.read().decode())
     except:
         print("IPData: Couldn't get ip location information")

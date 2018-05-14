@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     'app',
     'taggit',
     'sanitizer',
-    'macros'
+    'macros',
+    'notifications'
 ]
 
 SITE_ID = 1
@@ -115,7 +116,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'app.context_processor.tags_context_processor'
+                'app.context_processor.tags_context_processor',
+                'app.context_processor.unread_notifications'
             ],
         },
     },

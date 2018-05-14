@@ -4,6 +4,7 @@ from app.managers import AnswerManager, _CustomTagManager
 from taggit.managers import TaggableManager
 from django.urls import reverse
 from gbosa.settings import SITE_URL
+from datetime import datetime
 
 # Create your models here.
 
@@ -44,7 +45,7 @@ class View(models.Model):
     ip = models.GenericIPAddressField()
     city = models.CharField(max_length=128, blank=True)
     state = models.CharField(max_length=128, blank=True)
-    country = models.CharField(max_length=128, blank=True)
+    country_name = models.CharField(max_length=128, blank=True)
     country_code = models.CharField(max_length=10, blank=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=8, blank=True)
     longitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True)
@@ -61,7 +62,7 @@ class Subscribe(models.Model):
 class Comment(models.Model):
     comment = models.TextField(db_index=True)
     likes = models.ManyToManyField(Upvote, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     is_anonymous = models.BooleanField(default=False)
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True)
@@ -90,21 +91,30 @@ class Post(models.Model):
         ('Q', 'Question'),
         ('E', 'Experience')
     )
+    FLAG_CHOICES = (
+        ('offensive', 'Offensive'),
+        ('abusive', 'Abusive'),
+        ('lacks-credibility', 'Lacks Credibility')
+    )
     title = models.CharField(max_length=256, db_index=True)
     slug = models.SlugField(max_length=256, db_index=True, blank=True)
     description = models.TextField(db_index=True, blank=True, null=True)
     post_type = models.CharField(max_length=2, choices=TYPE_CHOICES, default='Q', null=False)
     is_anonymous = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=datetime.now)
+    updated_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    answers = models.ManyToManyField(Answer)
-    comments = models.ManyToManyField(Comment)
+    answers = models.ManyToManyField(Answer, blank=True)
+    comments = models.ManyToManyField(Comment, blank=True)
     views = models.ManyToManyField(View, blank=True)
     subscribers = models.ManyToManyField(Subscribe, blank=True)
     upvotes = models.ManyToManyField(Upvote, blank=True)
     tags = TaggableManager(manager=_CustomTagManager)
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, blank=True, null=True)
+    is_flagged = models.BooleanField(default=False)
+    flagged_reason = models.CharField(max_length=18, choices=FLAG_CHOICES, blank=True)
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

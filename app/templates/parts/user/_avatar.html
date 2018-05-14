@@ -1,6 +1,6 @@
 {% load static humanize %}
 <div class="avatar small">
-    <figure class="image is-48x48 circle">
+    <figure class="image is-32x32 circle">
         {% if payload.is_anonymous %}
             <img src="{% static "images/no-user.png" %}" alt="{{ payload.user.psuedouser.fullname|striptags }}">
         {% else %}

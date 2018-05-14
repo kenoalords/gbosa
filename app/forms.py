@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Textarea, CharField, CheckboxInput, TextInput, Select
+from django.forms import ModelForm, Textarea, CharField, CheckboxInput, TextInput, Select, RadioSelect
 from django.utils.translation import gettext_lazy as _
 from app.models import Post, Answer, Comment, Upvote, PsuedoUser
 from taggit.forms import TagField
@@ -16,7 +16,7 @@ class PostForm(ModelForm):
     is_anonymous = CheckboxInput()
 
     title.widget.attrs.update({'class': 'input title-input', 'placeholder' : 'Enter a title'})
-    tags.widget.attrs.update({'class': 'input', 'placeholder': 'Start typing a category'})
+    tags.widget.attrs.update({'class': 'input', 'placeholder': 'Tag your post'})
     description.widget.attrs.update({'class': 'textarea', 'rows': 3, 'placeholder': 'Start typing...'})
 
     class Meta:
@@ -56,4 +56,12 @@ class PsuedoUserForm(ModelForm):
         widgets = {
             'first_name': TextInput(attrs={'class':'input', 'placeholder':'First name'}),
             'last_name': TextInput(attrs={'class':'input', 'placeholder':'Last name'}),
+        }
+
+class FlagPostForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = ('flagged_reason',)
+        widgets = {
+            'flagged_reason': RadioSelect()
         }

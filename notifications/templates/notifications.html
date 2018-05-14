@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} Notifications {% endblock %}
+
+{% block content %}
+
+{% load humanize %}
+<div class="hero is-medium">
+    <div class="hero-body">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <h1 class="title is-3">Notifications</h1>
+                {% if notifications %}
+                    <table class="table">
+                        {% for n in notifications %}
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>
+                                <p>{{ n.message|safe }}</p>
+                                <span class="date">{{ n.created_at|naturaltime }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>You have not received any notifications yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
