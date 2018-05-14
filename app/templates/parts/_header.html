@@ -93,6 +93,7 @@
             {% if user.is_authenticated %}
             <li><a href="{% url 'user-posts' %}">My Posts</a></li>
             <li><a href="{% url 'psuedonym' %}">Psuedonym</a></li>
+            <li><a href="{% url 'notifications:index' %}" class="badge is-borderless is-badge-small" data-badge="{{ unread_notifications }}">Notifications</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
             {% else %}
             <li><a href="{% url 'social-login' %}">Login</a></li>

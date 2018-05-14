@@ -1,5 +1,6 @@
 node_modules/
 myaccount/
+gbosa/settings.py
 scss/
 js/
 static/

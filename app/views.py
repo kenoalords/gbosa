@@ -19,7 +19,6 @@ from django.utils.text import slugify
 from faker import Faker
 from utils.ip import view_log, ip_info, get_tags, view_log_entry
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-from app.tasks import mailer, log_the_view
 from django.core.exceptions import ObjectDoesNotExist
 from taggit.models import Tag
 from gbosa.decorators import current_user_is_owner, post_is_not_flagged, post_is_not_deleted
@@ -96,7 +95,6 @@ class PostCreate(CreateView):
             form.instance.is_published = True
         else:
             form.instance.is_published = False
-        # mailer.delay('Post created', 'A new post was created', ['kenoalords@gmail.com'])
         return super().form_valid(form)
 
 @method_decorator(login_required, name="dispatch")

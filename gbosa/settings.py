@@ -196,7 +196,6 @@ LOGIN_URL = '/login'
 
 LOGIN_REDIRECT_URL = 'index'
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
 
 # EMAIL SETTINGS
 EMAIL_HOST = 'smtp.mailtrap.io'
