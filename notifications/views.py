@@ -8,5 +8,5 @@ class NotificationList(ListView):
     template_name = 'notifications.html'
     context_object_name = 'notifications'
 
-    def get_queryset(self):
-        return Notification.objects.filter(user=self.request.user).order_by('-created_at')
+    def get_queryset(self, request):
+        return Notification.objects.filter(user=request.user).order_by('-created_at')
