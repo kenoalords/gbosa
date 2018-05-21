@@ -10,7 +10,7 @@
         <div class="hero-body">
             <div class="columns">
 
-                <div class="column is-8">
+                <div class="column is-8 single-post-content">
                     <div class="level is-mobile">
                         <div class="level-left">
                             <div class="level-item">
@@ -83,6 +83,7 @@
                             {% endfor %}
                         {% endif %}
                     </div>
+
                 </div>
                 <div class="column is-4 sidebar">
                     {% include "../tags/popular_tags.html" %}
@@ -96,6 +97,28 @@
                         </ul>
                         <div><a href="{% url "app:add-post" %}" class="button is-primary is-small has-text-weight-bold">Submit post</a></div>
                     {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-social-share">
+        <div class="container">
+            <div class="level is-mobile">
+                <div class="level-right">
+                    <h4 class="title is-7 level-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" style="margin-right:10px;">
+                          <path d="M561.94 158.06l-144-143.97C387.93-15.92 336 5.1 336 48.03v57.2c-42.45 1.88-84.03 6.55-120.76 17.99-35.17 10.95-63.07 27.58-82.91 49.42C108.22 199.2 96 232.6 96 271.94c0 61.7 33.18 112.45 84.87 144.76 37.55 23.5 85.25-12.65 71.02-55.74-15.52-47.12-17.16-70.92 84.11-78.76V336c0 43 51.97 63.91 81.94 33.94l144-144a47.99 47.99 0 0 0 0-67.88zM384 336V232.16C255.3 234.08 166.5 255.35 206.31 376 176.79 357.55 144 324.08 144 271.94c0-109.33 129.14-118.95 240-119.85V48l144 144-144 144zm24.74 84.5a82.66 82.66 0 0 0 20.97-9.31c7.98-4.95 18.29.83 18.29 10.21V464a48 48 0 0 1-48 48H48a48 48 0 0 1-48-48V112a48 48 0 0 1 48-48h132a12 12 0 0 1 12 12v4.49c0 4.91-2.99 9.37-7.57 11.15a245.18 245.18 0 0 0-38.05 18.58 12.14 12.14 0 0 1-6.28 1.78H54a6 6 0 0 0-6 6v340a6 6 0 0 0 6 6h340a6 6 0 0 0 6-6v-25.97c0-5.37 3.58-10.05 8.74-11.54z"/>
+                        </svg> Share this post
+                    </h4>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ post.get_relative_url }}" target="_blank" class="facebook level-item tooltip" rel="noopener" data-tooltip="Share on Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512"><path d="M448 56.7v398.5c0 13.7-11.1 24.7-24.7 24.7H309.1V306.5h58.2l8.7-67.6h-67v-43.2c0-19.6 5.4-32.9 33.5-32.9h35.8v-60.5c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9h-58.4v67.6h58.4V480H24.7C11.1 480 0 468.9 0 455.3V56.7C0 43.1 11.1 32 24.7 32h398.5c13.7 0 24.8 11.1 24.8 24.7z"/></svg>
+                    </a>
+                    <a href="https://twitter.com/home?status={{ post.title }}" class="twitter level-item tooltip" target="_blank" rel="noopener" data-tooltip="Share on Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+                    </a>
+                    <a href="https://plus.google.com/share?url={{ post.get_relative_url }}" class="twitter level-item tooltip" target="_blank" rel="noopener" data-tooltip="Share on Google+">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" width="24" height="24"><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+                    </a>
                 </div>
             </div>
         </div>

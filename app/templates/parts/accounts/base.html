@@ -9,18 +9,9 @@
     <link rel="stylesheet" href="{% static "css/main.css" %}">
     <title>Login | Gbosa!</title>
 </head>
-<body class="account">
-    <div class="container">
-        <div class="hero is-medium">
-            <div class="hero-body">
-                <div class="columns is-centered">
-                    <div class="column is-4 is-raised">
-                        {% block content %}
-                        {% endblock %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body class="account" style="background: url({% static 'images/login-background.jpg' %}) no-repeat center #222 !important;">
+    {% block content %}
+
+    {% endblock %}
 </body>
 </html>

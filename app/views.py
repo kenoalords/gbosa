@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from app.models import Post, Answer, PsuedoUser, Upvote, Comment, Region, Subscribe
-from app.forms import PostForm, AnswerForm, CommentForm, PsuedoUserForm, FlagPostForm
+from app.forms import PostForm, PostFormExperience, PostFormQuestion, AnswerForm, CommentForm, PsuedoUserForm, FlagPostForm
 from django.utils.text import slugify
 from faker import Faker
 from utils.ip import view_log, ip_info, get_tags, view_log_entry
@@ -83,13 +83,30 @@ class PostDetail(DetailView):
 
 # Question add form view
 @method_decorator(login_required, name='dispatch')
-class PostCreate(CreateView):
+class PostCreateExperience(CreateView):
     model = Post
-    form_class = PostForm
-    template_name = './parts/posts/add.html'
+    form_class = PostFormExperience
+    template_name = './parts/posts/add_experience.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.instance.post_type = 'E'
+        form.instance.slug = slugify(form.instance.title)
+        if self.request.POST['status'] == 'Publish':
+            form.instance.is_published = True
+        else:
+            form.instance.is_published = False
+        return super().form_valid(form)
+
+@method_decorator(login_required, name='dispatch')
+class PostCreateQuestion(CreateView):
+    model = Post
+    form_class = PostFormQuestion
+    template_name = './parts/posts/add_question.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.post_type = 'Q'
         form.instance.slug = slugify(form.instance.title)
         if self.request.POST['status'] == 'Publish':
             form.instance.is_published = True
@@ -99,10 +116,10 @@ class PostCreate(CreateView):
 
 @method_decorator(login_required, name="dispatch")
 @method_decorator(current_user_is_owner, name="dispatch")
-class PostUpdate(UpdateView):
+class PostUpdateQuestion(UpdateView):
     model = Post
-    form_class = PostForm
-    template_name = './parts/posts/add.html'
+    form_class = PostFormQuestion
+    template_name = './parts/posts/edit.html'
 
     def get_object(self, **kwargs):
         return Post.objects.get(pk=self.kwargs['pk'])

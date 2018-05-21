@@ -1,24 +1,51 @@
 {% extends './base.html' %}
 
-{% load socialaccount %}
+{% load socialaccount static %}
 {% block content %}
-
-    {{ form.non_field_errors }}
-    <div class="card">
-        <div class="card-content">
-            <p><a href="{% provider_login_url 'google' %}" class="button is-google-plus is-block">
-                <span class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16"><path fill="#ffffff" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
-                </span>
-                <span>Login with Google</span>
-            </a></p>
-            <p><a href="{% provider_login_url "facebook" method="oauth2" %}" class="button is-facebook is-block">
-                <span class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" width="16" height="16"><path fill="#ffffff" d="M76.7 512V283H0v-91h76.7v-71.7C76.7 42.4 124.3 0 193.8 0c33.3 0 61.9 2.5 70.2 3.6V85h-48.2c-37.8 0-45.1 18-45.1 44.3V192H256l-11.7 91h-73.6v229"/></svg>
-                </span>
-                <span>Login with Facebook</span>
-            </a></p>
+<div class="container">
+    <div class="hero is-medium">
+        <div class="hero-body">
+            <div class="columns is-centered">
+                <div class="column is-10 is-raised login-form">
+                    <a href="{% url 'index' %}">
+                        <figure class="image is-centered is-64x64 is-circular" style="margin: 0 auto 2em">
+                            <img src="{% static "images/no-user.png" %}" alt="Anonymous" >
+                        </figure>
+                    </a>
+                    <hr>
+                    <div class="columns">
+                        <div class="column is-8">
+                            <div class="caption">
+                                <h1 class="title is-4">Growing together through sharing personal experiences.</h1>
+                                <p>Gbosa! is a community of people helping each other to overcome everyday challenges by sharing their person experiences on real life issues</p>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                                {{ form.non_field_errors }}
+                                <div>
+                                    <a href="{% provider_login_url 'google' %}" class="button is-google-plus is-block">
+                                        <span class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16"><path fill="#ffffff" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+                                        </span>
+                                        <span>Continue with Google</span>
+                                    </a>
+                                    <br>
+                                    <a href="{% provider_login_url "facebook" method="oauth2" %}" class="button is-facebook is-block">
+                                        <span class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" width="16" height="16"><path fill="#ffffff" d="M76.7 512V283H0v-91h76.7v-71.7C76.7 42.4 124.3 0 193.8 0c33.3 0 61.9 2.5 70.2 3.6V85h-48.2c-37.8 0-45.1 18-45.1 44.3V192H256l-11.7 91h-73.6v229"/></svg>
+                                        </span>
+                                        <span>Continue with Facebook</span>
+                                    </a>
+                                </div>
+                                <p style="margin-top: 1em">
+                                    <a href="{% url 'index' %}">Go back home</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
-
+</div>
+<p class="credit">Photo by Kaique Rocha from <a href="https://pexels.com">Pexels</a></p>
 {% endblock %}

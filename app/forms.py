@@ -12,6 +12,38 @@ POST_TYPE_CHOICES = (
 class PostForm(ModelForm):
     title = CharField()
     tags = TagField()
+    is_anonymous = CheckboxInput()
+    description = CharField()
+
+    title.widget.attrs.update({'class': 'input title-input', 'placeholder' : 'Enter a title'})
+    tags.widget.attrs.update({'class': 'input', 'placeholder': 'Tag your post'})
+    description.widget.attrs.update({'class': 'textarea', 'rows': 3, 'placeholder': 'Start typing...'})
+
+    class Meta:
+        model = Post
+        fields = ('title', 'tags', 'description', 'is_anonymous')
+        labels = {
+            'is_anonymous': _('Post with psuedo name'),
+        }
+
+class PostFormQuestion(ModelForm):
+    title = CharField()
+    tags = TagField()
+    is_anonymous = CheckboxInput()
+
+    title.widget.attrs.update({'class': 'input title-input', 'placeholder' : 'Enter a title'})
+    tags.widget.attrs.update({'class': 'input', 'placeholder': 'Tag your post'})
+
+    class Meta:
+        model = Post
+        fields = ('title', 'tags', 'is_anonymous')
+        labels = {
+            'is_anonymous': _('Post with psuedo name'),
+        }
+
+class PostFormExperience(ModelForm):
+    title = CharField()
+    tags = TagField()
     description = CharField(widget=Textarea)
     is_anonymous = CheckboxInput()
 
@@ -21,7 +53,7 @@ class PostForm(ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'tags', 'description', 'is_anonymous', 'post_type')
+        fields = ('title', 'tags', 'description', 'is_anonymous')
         labels = {
             'is_anonymous': _('Post with psuedo name'),
         }

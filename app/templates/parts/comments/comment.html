@@ -18,7 +18,7 @@
         <article>
             <p>{{ comment.comment|linebreaksbr }}</p>
         </article>
-        <footer class="level">
+        <footer class="level is-mobile">
             <div class="level-left">
                 <div class="level-item">
                     <form action="{% url "app:comment-like" comment.id %}" method="POST" id="comment-{{ comment.id }}">
