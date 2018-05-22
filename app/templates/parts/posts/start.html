@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="hero is-medium">
+    <div class="hero-body">
+        <div class="is-centered columns">
+            <div class="column is-4">
+                <h4 class="title is-5 has-text-centered">What will you like to do today?</h4>
+                <div class="card">
+                    <div class="card-content">
+                        <a href="{% url 'app:add-post-question' %}" class="button is-block is-primary">Ask a question</a>
+                        <br>
+                        <a href="{% url 'app:add-post-experience' %}" class="button is-block is-primary">Share an experience</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

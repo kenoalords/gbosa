@@ -1,8 +1,15 @@
 {% if tags %}
-    <h3 class="title is-6">Popular Tags</h3>
-    <ul class="tag-list">
-        {% for tag in tags %}
-            <li><a href="{% url "app:tag-list" tag.slug %}">{{ tag.name|capfirst }}</a></li>
-        {% endfor %}
-    </ul>
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-6">Popular Tags</h3>
+        <hr>
+        <ul class="tag-list">
+            {% for tag in tags %}
+                <li><a href="{% url "app:tag-list" tag.slug %}">{{ tag.name|capfirst }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+    <h3 class="title is-6"></h3>
+
 {% endif %}

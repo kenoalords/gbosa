@@ -1,12 +1,23 @@
 {% extends "../base.html" %}
-{% block title %}Growing together{% endblock %}
+{% block title %}Gbosa!{% endblock %}
 {% block content %}
-    <div class="hero is-medium" id="posts">
+
+{% if user.is_authenticated == False %}
+<div class="hero is-medium is-danger is-bold">
+    <div class="hero-body has-text-centered teaser">
+        <h1 class="title is-3">
+            Connect &amp; Grow through sharing Experiences!
+        </h1>
+        <p class="has-text-white">We can all learn from each other.</p>
+        <a href="{% url 'app:start' %}" class="button is-primary">Get started</a>
+    </div>
+</div>
+{% endif %}
+<div class="">
+    <div class="hero" id="posts">
         <div class="hero-body">
             <div class="columns">
-                <div class="column is-2 is-hidden-mobile">
-                    {% include "./tags/popular_tags.html" %}
-                </div>
+
                 <div class="column is-8">
                     {% for post in posts %}
                         {% include "./posts/_post.html" with post=post %}
@@ -14,8 +25,12 @@
 
                     {% include "./_paginator.html" with posts=posts %}
                 </div>
+                <div class="column is-4 is-hidden-mobile">
+                    {% include "./tags/popular_tags.html" %}
+                </div>
             </div>
 
         </div>
     </div>
+</div>
 {% endblock %}

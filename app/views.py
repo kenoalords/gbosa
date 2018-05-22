@@ -30,6 +30,9 @@ from app.signals import notifications
 from app.faker_ng import fake
 # faker = Faker()
 
+class PostStart(TemplateView):
+    template_name = './parts/posts/start.html'
+
 # Class base Posts List View
 class PostList(ListView):
     queryset = Post.objects.filter(is_published=True, is_flagged=False, is_deleted=False).order_by('-created_at')

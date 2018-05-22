@@ -6,92 +6,103 @@
 {% load sanitizer static %}
 
 {% block content %}
+
     <div class="hero is-medium" id="single-post">
         <div class="hero-body">
             <div class="columns">
 
                 <div class="column is-8 single-post-content">
-                    <div class="level is-mobile">
-                        <div class="level-left">
-                            <div class="level-item">
-                                {% include "../user/_avatar.html" with payload=post %}
+                    <div class="box">
+                        <div class="level is-mobile">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    {% include "../user/_avatar.html" with payload=post %}
+                                </div>
                             </div>
-                        </div>
-                        <div class="level-right">
-                            <div class="level-item">
-                                <a href="{% url "app:post-type-list" post.post_type %}" class="tag">
-                                    <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="14" height="14"><path fill="#999" d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"/></svg></span>
-                                    <span>{{ post.get_post_type_display }}</span>
-                                </a>
-                            </div>
-                            {% if user.is_authenticated and user == post.user %}
-                            <div class="level-item">
-                                {% if post.post_type == "Q" %}
-                                    <a href="{% url "app:edit-post" pk=post.pk %}" class="button is-white is-small tooltip" data-tooltip="Edit Question">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16"><path fill="#209cee" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <a href="{% url "app:post-type-list" post.post_type %}" class="tag">
+                                        <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="14" height="14"><path fill="#999" d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"/></svg></span>
+                                        <span>{{ post.get_post_type_display }}</span>
                                     </a>
-                                {% endif %}
-                                {% if post.post_type == "E" %}
-                                    <a href="{% url "app:edit-experience" pk=post.pk %}" class="button is-white is-small tooltip" data-tooltip="Edit Experience">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16"><path fill="#209cee" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>
+                                </div>
+                                {% if user.is_authenticated and user == post.user %}
+                                <div class="level-item">
+                                    {% if post.post_type == "Q" %}
+                                        <a href="{% url "app:edit-post" pk=post.pk %}" class="button is-white is-small tooltip" data-tooltip="Edit Question">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16"><path fill="#209cee" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>
+                                        </a>
+                                    {% endif %}
+                                    {% if post.post_type == "E" %}
+                                        <a href="{% url "app:edit-experience" pk=post.pk %}" class="button is-white is-small tooltip" data-tooltip="Edit Experience">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16"><path fill="#209cee" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>
+                                        </a>
+                                    {% endif %}
+
+                                </div>
+                                <div class="level-item">
+                                    <a href="{% url "app:delete-post" pk=post.pk %}" class="button is-white is-small tooltip" data-tooltip="Delete post">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16"><path fill="#CD6132" d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"/></svg>
                                     </a>
+                                </div>
                                 {% endif %}
-
                             </div>
-                            <div class="level-item">
-                                <a href="{% url "app:delete-post" pk=post.pk %}" class="button is-white is-small tooltip" data-tooltip="Delete post">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16"><path fill="#CD6132" d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"/></svg>
-                                </a>
+                        </div>
+
+                        <h1 class="title is-3">
+                            {{ post.title }}
+                        </h1>
+
+                        {% include "./_post_meta.html" with post=post %}
+
+                        {% if post.tags.count > 0 %}
+                            <div class="tags">
+                                {% for tag in post.tags.all %}
+                                    <a href="{% url "app:tag-list" tag.slug %}" class="button is-small is-light is-rounded">{{ tag|capfirst }}</a>
+                                {% endfor %}
                             </div>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <h1 class="title is-3">
-                        {{ post.title }}
-                    </h1>
-
-                    {% include "./_post_meta.html" with post=post %}
-
-                    {% if post.tags.count > 0 %}
-                        <div class="tags">
-                            {% for tag in post.tags.all %}
-                                <a href="{% url "app:tag-list" tag.slug %}" class="button is-small is-light is-rounded">{{ tag|capfirst }}</a>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-
-                    {% if post.post_type == 'E' %}
-                        <article class="post post-type-{{ post.get_post_type_display|lower }}" id="post-{{ post.id }}">
-                            {{ post.description|strip_html|safe }}
-                        </article>
-                    {% endif %}
-
-                    {% if post.post_type == 'Q' %}
-                        <!-- Include answer form -->
-                        {% include "../answers/answer-form.html" with form=form %}
-                    {% else %}
-                        <!-- Include comment form -->
-                        {% include "../comments/comment-form.html" with form=c_form %}
-                    {% endif %}
-
-
-
-                    <!-- Loop through answers -->
-                    <div id="comment-section">
-                        {% if post.post_type == 'Q' %}
-                            <h3 class="title is-6">{{ answers.count }} Answer{{ answers.count|pluralize }}</h3>
-                            {% for answer in answers %}
-                                {% include '../answers/answer.html' with answer=answer %}
-                            {% endfor %}
-                        {% else %}
-                            <h3 class="title is-6">{{ post.comments.count }} Comment{{ post.comments.count|pluralize }}</h3>
-                            {% for comment in post.comments.all %}
-                                {% include '../comments/comment.html' with comment=comment %}
-                            {% endfor %}
                         {% endif %}
-                    </div>
 
+                        {% if post.post_type == 'E' %}
+                            <article class="post post-type-{{ post.get_post_type_display|lower }}" id="post-{{ post.id }}">
+                                {{ post.description|strip_html|safe }}
+                            </article>
+                        {% endif %}
+                        </div>
+                        {% if post.post_type == 'Q' %}
+                            <!-- Include answer form -->
+                            {% include "../answers/answer-form.html" with form=form %}
+                        {% else %}
+                            <!-- Include comment form -->
+                            {% include "../comments/comment-form.html" with form=c_form %}
+                        {% endif %}
+
+
+
+                        <!-- Loop through answers -->
+                        <div id="comment-section">
+                            {% if post.post_type == 'Q' %}
+                                <h3 class="title is-5">
+                                    {{ answers.count }} Answer{{ answers.count|pluralize }}
+                                </h3>
+                                {% if user.is_authenticated == False %}
+                                    <p class="subtitle is-6"><a href="/accounts/login">Login or sign up</a> to share an answer.</p>
+                                {% endif %}
+                                <!-- Loop through answers -->
+                                {% for answer in answers %}
+                                    {% include '../answers/answer.html' with answer=answer %}
+                                {% endfor %}
+                            {% else %}
+                                <h3 class="title is-5">{{ post.comments.count }} Comment{{ post.comments.count|pluralize }}</h3>
+                                {% if user.is_authenticated == False %}
+                                    <p class="subtitle is-6"><a href="/accounts/login">Login or sign up</a> to submit a comment.</p>
+                                {% endif %}
+                                {% for comment in post.comments.all %}
+                                    {% include '../comments/comment.html' with comment=comment %}
+                                {% endfor %}
+                            {% endif %}
+
+                    </div>
                 </div>
                 <div class="column is-4 sidebar">
                     {% include "../tags/popular_tags.html" %}
