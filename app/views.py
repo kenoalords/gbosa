@@ -16,7 +16,7 @@ from django.db.models import Q
 from app.models import Post, Answer, PsuedoUser, Upvote, Comment, Region, Subscribe
 from app.forms import PostForm, PostFormExperience, PostFormQuestion, AnswerForm, CommentForm, PsuedoUserForm, FlagPostForm
 from django.utils.text import slugify
-from faker import Faker
+# from faker import Faker
 from utils.ip import view_log, ip_info, get_tags, view_log_entry
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.core.exceptions import ObjectDoesNotExist
@@ -27,7 +27,8 @@ from gbosa.decorators import current_user_is_owner, post_is_not_flagged, post_is
 # Import signals
 from app.signals import notifications
 
-faker = Faker()
+from app.faker_ng import fake
+# faker = Faker()
 
 # Class base Posts List View
 class PostList(ListView):
@@ -309,7 +310,7 @@ class PsuedoCreate(FormView):
             psuedonym = self.request.user.psuedouser
             return {'first_name': psuedonym.first_name, 'last_name': psuedonym.last_name}
         except:
-            return {'first_name': faker.first_name(), 'last_name': faker.last_name()}
+            return {'first_name': fake.first_name(), 'last_name': fake.last_name()}
             # pass
 
 # Flag post
