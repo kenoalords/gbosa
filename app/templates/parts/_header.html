@@ -1,4 +1,4 @@
-{% load static %}
+{% load static account %}
 <header id="main">
     <nav class="navbar is-fixed-top is-raised is-transparent" id="main-navbar">
         <div class="container">
@@ -35,16 +35,16 @@
                             <div class="navbar-dropdown">
                                 <a href="{% url 'user-posts' %}" class="navbar-item">My Posts</a>
                                 <a href="{% url 'psuedonym' %}" class="navbar-item">Psuedonym</a>
-                                <a href="{% url 'logout' %}" class="navbar-item">Logout</a>
+                                <a href="/accounts/logout" class="navbar-item">Logout</a>
                             </div>
                         </div>
 
                     {% else %}
-                        <a href="{% url 'social-login' %}" class="navbar-item">Login</a>
+                        <a href="/accounts/login" class="navbar-item">Login</a>
                     {% endif %}
                     <div class="navbar-item has-dropdown is-hoverable">
                         <div class="navbar-link no-dropdown-arrow" id="add-post">
-                            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16"><path d="M448 294.2v-76.4c0-13.3-10.7-24-24-24H286.2V56c0-13.3-10.7-24-24-24h-76.4c-13.3 0-24 10.7-24 24v137.8H24c-13.3 0-24 10.7-24 24v76.4c0 13.3 10.7 24 24 24h137.8V456c0 13.3 10.7 24 24 24h76.4c13.3 0 24-10.7 24-24V318.2H424c13.3 0 24-10.7 24-24z"/></svg></span> <span>Post</span>
+                            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16"><path d="M448 294.2v-76.4c0-13.3-10.7-24-24-24H286.2V56c0-13.3-10.7-24-24-24h-76.4c-13.3 0-24 10.7-24 24v137.8H24c-13.3 0-24 10.7-24 24v76.4c0 13.3 10.7 24 24 24h137.8V456c0 13.3 10.7 24 24 24h76.4c13.3 0 24-10.7 24-24V318.2H424c13.3 0 24-10.7 24-24z"/></svg></span>
                         </div>
                         <div class="navbar-dropdown is-right">
                             <a href="{% url 'app:add-post-experience' %}" class="navbar-item">Share an Experience</a>

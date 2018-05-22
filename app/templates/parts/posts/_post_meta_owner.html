@@ -13,7 +13,12 @@
     </div>
     <div class="level-right">
         <div class="level-item">
-            <a href="{% url "app:edit-post" post.id %}" class="button is-info is-small is-rounded">Edit</a>
+            {% if post.post_type == "Q" %}
+                <a href="{% url "app:edit-post" post.id %}" class="button is-info is-small is-rounded">Edit</a>
+            {% endif %}
+            {% if post.post_type == "E" %}
+                <a href="{% url "app:edit-experience" post.id %}" class="button is-info is-small is-rounded">Edit</a>
+            {% endif %}
         </div>
         <div class="level-item">
             <a href="{% url "app:delete-post" post.id %}" class="has-text-danger">Delete</a>

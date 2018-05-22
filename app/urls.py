@@ -1,12 +1,13 @@
 from django.urls import path
 from app import views
-from app.views import PostList, PostDetail, PostUpdateQuestion, PostDelete, AnswerSubmit, CommentSubmit, UpvoteSubmit, TagList, PostTypeList, CommentLike, Subscribers, FlagPost, PostCreateExperience, PostCreateQuestion
+from app.views import PostList, PostDetail, PostUpdateQuestion, PostUpdateExperience, PostDelete, AnswerSubmit, CommentSubmit, UpvoteSubmit, TagList, PostTypeList, CommentLike, Subscribers, FlagPost, PostCreateExperience, PostCreateQuestion
 
 app_name = 'app'
 
 urlpatterns = [
     path('', PostList.as_view(), name='index'),
     path('<int:pk>/edit/question', PostUpdateQuestion.as_view(), name='edit-post'),
+    path('<int:pk>/edit/experience', PostUpdateExperience.as_view(), name='edit-experience'),
     path('<int:pk>/delete', PostDelete.as_view(), name='delete-post'),
     path('<int:pk>/flag', FlagPost.as_view(), name='flag-post'),
     path('<int:pk>/<slug:slug>', PostDetail.as_view(), name="view-post"),

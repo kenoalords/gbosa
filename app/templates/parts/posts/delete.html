@@ -12,8 +12,9 @@
                         Are you sure you want to delete this post?
                     </div>
                     <h3 class="title">{{ post.title }}</h3>
-                    <p>{{ post.description|truncatewords:48|striptags }}</p>
-
+                    {% if post.description %}
+                        <p>{{ post.description|truncatewords:48|striptags }}</p>
+                    {% endif %}
                     <form method="post">
                         {% csrf_token %}
                         <div class="field is-grouped">

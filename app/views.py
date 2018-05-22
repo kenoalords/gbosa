@@ -29,9 +29,6 @@ from app.signals import notifications
 
 faker = Faker()
 
-class SocialLoginView(TemplateView):
-    template_name = "parts/accounts/login.html"
-
 # Class base Posts List View
 class PostList(ListView):
     queryset = Post.objects.filter(is_published=True, is_flagged=False, is_deleted=False).order_by('-created_at')
@@ -99,6 +96,22 @@ class PostCreateExperience(CreateView):
         return super().form_valid(form)
 
 @method_decorator(login_required, name='dispatch')
+class PostUpdateExperience(UpdateView):
+    model = Post
+    form_class = PostFormExperience
+    template_name = './parts/posts/edit_e.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.post_type = 'E'
+        form.instance.slug = slugify(form.instance.title)
+        if self.request.POST['status'] == 'Publish':
+            form.instance.is_published = True
+        else:
+            form.instance.is_published = False
+        return super().form_valid(form)
+
+@method_decorator(login_required, name='dispatch')
 class PostCreateQuestion(CreateView):
     model = Post
     form_class = PostFormQuestion
@@ -126,6 +139,7 @@ class PostUpdateQuestion(UpdateView):
 
     def form_valid(self, form):
         form.instance.slug = slugify(form.instance.title)
+        form.instance.post_type = "Q"
         if ( self.request.POST['status'] == 'Publish' ):
             form.instance.is_published = True
         else:

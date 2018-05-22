@@ -1,0 +1,36 @@
+{% extends "./base.html" %}
+
+{% load i18n %}
+{% load account socialaccount static %}
+
+{% block title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<div class="columns">
+    <div class="column is-8">
+        <h3 class="title is-5"><img src="{% static 'images/gbosa-logo.svg' %}" alt="Gbosa" style="max-width:80px; height:auto"></h3>
+        <h1 class="title is-4">
+            Growing together through sharing personal experiences.
+        </h1>
+        <p>
+            Gbosa! is a community of people helping each other to overcome everyday challenges by sharing their person experiences on real life issues
+        </p>
+    </div>
+    <div class="column is-4">
+        <h2 class="title is-6"></h2>
+        {% get_providers as socialaccount_providers %}
+
+        {% if socialaccount_providers %}
+            <div class="socialaccount_ballot">
+                <ul class="socialaccount_providers">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                </ul>
+                <p class="is-size-6 has-text-centered">
+                    <a href="{% url 'index' %}" class="has-text-grey">Go back home</a>
+                </p>
+            </div>
+            {% include "socialaccount/snippets/login_extra.html" %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

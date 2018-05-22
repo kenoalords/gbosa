@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url, handler400, handler403, handler404, handler500
 from django.views.generic import TemplateView
-from app.views import SearchList, PostList, SocialLoginView, account_logout, PsuedoCreate, UserPostList, search_tags_ajax
+from app.views import SearchList, PostList, account_logout, PsuedoCreate, UserPostList, search_tags_ajax
 from app import views
 
 urlpatterns = [
@@ -27,8 +27,6 @@ urlpatterns = [
     path('search/', SearchList.as_view(), name="search"),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('login/', SocialLoginView.as_view(), name="social-login"),
-    path('logout/', account_logout, name="logout"),
     path('psuedonym/', PsuedoCreate.as_view(), name='psuedonym'),
     path('my-posts/', UserPostList.as_view(), name='user-posts'),
     path('search-tags', search_tags_ajax),
