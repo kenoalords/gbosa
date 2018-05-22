@@ -2,7 +2,6 @@
 {% block title %}Gbosa!{% endblock %}
 {% block content %}
 
-{% if user.is_authenticated == False %}
 <div class="hero is-medium is-danger is-bold">
     <div class="hero-body has-text-centered teaser">
         <h1 class="title is-3">
@@ -12,7 +11,7 @@
         <a href="{% url 'app:start' %}" class="button is-primary">Get started</a>
     </div>
 </div>
-{% endif %}
+
 <div class="">
     <div class="hero" id="posts">
         <div class="hero-body">

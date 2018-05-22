@@ -12,7 +12,9 @@
                             {% include "./_post_owner.html" with post=post %}
                         {% endfor %}
                     {% else %}
-                        <h4 class="title is-warning">You don't have any posts yet</h4>
+                        <div class="box">
+                            <h4 class="title is-warning">You don't have any posts yet</h4>
+                        </div>
                     {% endif %}
                 </div>
             </div>
