@@ -108,13 +108,15 @@
                     {% include "../tags/popular_tags.html" %}
 
                     {% if related_posts %}
-                        <h4 class="title is-6" style="margin-top:2em">Related Posts</h4>
+                    <div class="box">
+                        <h4 class="title is-6" style="">Related Posts</h4>
+                        <hr>
                         <ul class="related-post">
                             {% for post in related_posts %}
                                 <li><a href="{% url "app:view-post" post.pk post.slug %}">{{ post.title }}</a></li>
                             {% endfor %}
                         </ul>
-                        <div><a href="{% url "app:add-post" %}" class="button is-primary is-small has-text-weight-bold">Submit post</a></div>
+                    </div>
                     {% endif %}
                 </div>
             </div>
